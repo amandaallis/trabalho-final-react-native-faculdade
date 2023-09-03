@@ -19,6 +19,9 @@ const Login = ({navigation}) => {
     const [password, setPassword] = useState()
     const [avisoInput, setAvisoInput] = useState()
     const [avisoInputPass, setAvisoInputPass] = useState()
+    const [correctDataPass, setCorrectDataPass] = useState(false)
+    const [correctDataEmail, setCorrectDataEmail] = useState(false)
+
 /*    const [existEmail, setExistEmail] = useState(true)
     const [existPassword, setExistPassword] = useState(true)*/
 
@@ -27,6 +30,7 @@ const Login = ({navigation}) => {
         if(value.length >= 10) {
             console.log("Valor válido")
             setAvisoInput("")
+            setCorrectDataEmail(true)
         } else {
             setAvisoInput("* O email precisa ter mais de 10 caracteres")
         }
@@ -36,6 +40,7 @@ const Login = ({navigation}) => {
     const onChangePassword = (value) => {
         if(value) {
             setAvisoInputPass("")
+            setCorrectDataPass(true)
         } else {
             setAvisoInput("Senha inválida")
         }
@@ -69,10 +74,13 @@ const Login = ({navigation}) => {
             />
 
             {avisoInputPass? <Text style={styles.textError}>{avisoInputPass}</Text> : ""}
-
             <Button 
                 title="Login"
-                onPress={() => navigation.navigate('Teste')}
+                onPress={() => {
+                    if(correctDataPass && correctDataEmail){
+                        navigation.navigate('Teste')
+                    }
+                } }
             />
 
         </SafeAreaView>
