@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import { useState } from "react";
-import { Button, SafeAreaView, StyleSheet, Text, TextInput } from "react-native";
+import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput } from "react-native";
 
 const styles = StyleSheet.create({
     input: {
@@ -12,7 +12,19 @@ const styles = StyleSheet.create({
       textError: {
         color: "#ff0000",
         margin: 4
-      }
+      },
+      image: {
+        width: 100,
+        height: 100,
+        borderWidth: 1,
+        borderRadius: 4,
+        marginLeft: 80,
+        marginRight: 0,
+        padding: 80,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
 })
 const Login = ({navigation}) => {
     const [email, setEmail] = useState()
@@ -47,14 +59,6 @@ const Login = ({navigation}) => {
         setPassword(value)
     }
     
-    const login = () => {
-        if(avisoInput==="" && avisoInputPass==="") {
-            console.log("Pode entrar")
-        } else {
-            console.log("Não can")
-        }
-    }
-    
     return (
         <SafeAreaView>
             <TextInput 
@@ -78,10 +82,13 @@ const Login = ({navigation}) => {
                 title="Login"
                 onPress={() => {
                     if(correctDataPass && correctDataEmail){
-                        navigation.navigate('Teste')
+                        navigation.navigate('Pagination')
                     }
                 } }
+
+                
             />
+
 
         </SafeAreaView>
     );
