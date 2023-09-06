@@ -1,7 +1,8 @@
 /*eslint-disable*/ 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {SafeAreaView, Text, FlatList, View, StyleSheet, Image} from 'react-native';
+import {SafeAreaView, Text, FlatList, View, StyleSheet, Image, Touchable, TouchableOpacity, Button} from 'react-native';
+import About from './About';
 
 const styles = StyleSheet.create({
   card: {
@@ -37,8 +38,11 @@ const styles = StyleSheet.create({
 const RenderItem = ({character}) => {
   const {name, image, location} = character
   return (
-    <View style={styles.card}>
+    <View 
+      style={styles.card}>
+      
       {console.log(image)}
+
       <Image 
         source={{uri: image}}
         style={styles.image}
@@ -51,7 +55,7 @@ const RenderItem = ({character}) => {
   )
 }
 
-const Pagination = () => {
+const Pagination = ({navigation}) => {
 
   const [character, setCharacter] = useState([]);
 
@@ -64,8 +68,18 @@ const Pagination = () => {
     renderData()
   }, [])
 
+  
+
   return (
-    <SafeAreaView>
+    <SafeAreaView >
+            <Button title='a' onPress={() => navigation.navigate(About)}/>
+
+      <TouchableOpacity 
+        onPress={() => {
+            navigation.navigate("navigation")
+      }}
+
+  />
        <FlatList
         data={character}
         renderItem={({item}) => <RenderItem character={item}/>}
