@@ -84,12 +84,9 @@ const Login = ({navigation}) => {
                     if(correctDataPass && correctDataEmail){
                         navigation.navigate('Pagination')
                     }
-                } }
-
-                
+                } 
+            }
             />
-
-
         </SafeAreaView>
     );
 }
