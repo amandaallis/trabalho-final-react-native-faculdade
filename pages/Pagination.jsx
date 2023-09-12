@@ -23,17 +23,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   text: {
-    margin: -80,
-    paddingTop: 0,
+    position: "absolute",
+    width: "100%",
     justifyContent: 'center',
     textAlign: 'center'
   },
   image: {
-    width: 100, 
-    height: 80
+    margin: 10,
+    width: "20%", 
+    height: "80%"
   },
   textLoc: {
-    marginTop: -30,
+    position: 'absolute',
+    marginTop: 30,
     marginLeft: 100,
   },
   apiTitle: {
@@ -60,8 +62,8 @@ const RenderItem = ({ character }) => {
           style={styles.image}
         />
         <Text style={styles.text}>{name}</Text>
-        <Text style={styles.text}>{id}</Text>
-        <Text style={styles.textLoc}>localização {location.name}</Text>
+       
+        <Text style={styles.textLoc}>Ultima localização: {location.name}</Text>
       </View>
     </TouchableOpacity>
   )
