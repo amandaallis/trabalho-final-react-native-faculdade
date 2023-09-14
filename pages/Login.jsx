@@ -1,13 +1,15 @@
 /*eslint-disable*/
 import { useState } from "react";
-import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput } from "react-native";
+import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 
 const styles = StyleSheet.create({
     input: {
+        borderColor: "#2f903d",
         borderWidth: 1,
         borderRadius: 4,
         padding: 16,
         margin: 8,
+        width: "75%",
       },
       textError: {
         color: "#ff0000",
@@ -25,6 +27,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
       },
+    styleArea: {
+        // flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    loginButton: {
+        height: 80,
+        width: 8000,
+    },
+    imageLogin: {
+        margin: "10%",
+        marginTop: 20,
+        width: "75%",
+        height: "50%",
+        justifyContent: "center",
+        alignItems: "center"
+
+    },
+    backGround: {
+        padding: 0,
+    }
+
 })
 const Login = ({navigation}) => {
     const [email, setEmail] = useState()
@@ -60,34 +84,43 @@ const Login = ({navigation}) => {
     }
     
     return (
-        <SafeAreaView>
+        <View style={styles.backGround}>
+            <Image 
+        source={require('../images/rick-and-mortyLogin.png')} 
+        style={styles.imageLogin}
+      />
+        <SafeAreaView style={styles.styleArea}>
+        
             <TextInput 
                 style={styles.input}
                 placeholder="Login"
                 value={email}
                 onChangeText={onChangeValue}
+                placeholderTextColor="#20522a"
             />
-            
-            {avisoInput? <Text style={styles.textError}>{avisoInput}</Text> : ""}
 
             <TextInput 
+                placeholderTextColor="#20522a"
                 style={styles.input}
                 placeholder="Password"
                 value={password}
                 onChangeText={onChangePassword}
             />
+            {avisoInput? <Text style={styles.textError}>{avisoInput}</Text> : ""}
 
             {avisoInputPass? <Text style={styles.textError}>{avisoInputPass}</Text> : ""}
             <Button 
                 title="Login"
+                color="#2f903d"
                 onPress={() => {
-                    if(correctDataPass && correctDataEmail){
+                    if(correctDataPass !=null && correctDataEmail){
                         navigation.navigate('Pagination')
                     }
                 } 
             }
             />
         </SafeAreaView>
+        </View>
     );
 }
 

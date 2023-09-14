@@ -105,7 +105,7 @@ const Pagination = () => {
         renderItem={({ item }) => <RenderItem character={item} />}
         refreshing={loading}
         onRefresh={renderData}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.2}
         ListFooterComponent={<ActivityIndicator size={'large'}/>}
       />
     </SafeAreaView>
