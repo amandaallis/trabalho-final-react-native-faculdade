@@ -118,7 +118,15 @@ const Login = ({navigation}) => {
                     }
                 } 
             }
-            />
+            /> 
+            <Button 
+            title="Confira aqui os episodios"
+            color="#2f903d"
+            onPress={() => {
+                    navigation.navigate('Episodes')  
+            } 
+        }
+        />
         </SafeAreaView>
         </View>
     );

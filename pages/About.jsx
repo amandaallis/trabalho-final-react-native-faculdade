@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 import {SafeAreaView, Text, FlatList, View, StyleSheet,
  Image, Touchable, TouchableOpacity, Button} from 'react-native';
  import { useNavigation, useRoute } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 
 const styles = StyleSheet.create({
  card: {
   margin: 20,
-  height: "90%",
+  height: "95%",
   shadowColor: "#000",
   shadowOffset: {
   width: 0,
@@ -21,35 +22,33 @@ const styles = StyleSheet.create({
  backgroundColor: "#fff",
  borderRadius: 10
  },
-
-
  text: {
-  margin: -80 ,
-  paddingTop: 0,
   justifyContent: 'center',
   textAlign: 'center'
  },
  image: {
   width: "80%",
   height: "50%",
-  margin: 10,
+  margin: 30,
   marginTop: 30
-
- },
- textLoc: {
-  marginTop: -30,
-  marginLeft: 100,
  },
  name: {
   marginLeft: 80,
   marginTop: 5,
   position: 'absolute',
   fontSize: 30,
-  color: "#516d3f"
+  color: "#516d3f",
+  textAlign: "center"
  },
   texts: {
+    marginRight: 50,
+    marginLeft: 50,
+    marginTop: 10,
+    borderColor: "#2f903d",
+    borderWidth: 2,
+    borderRadius: 10,
     margin: 1,
-    fontSize: 20,
+    fontSize: 15,
     textAlign: "center",
     color: "#516d3f"
   }
@@ -72,6 +71,7 @@ const RenderItem = ({character, id} ) => {
 }
 
 const About = ({id}) => {
+  const insets = useSafeAreaInsets();
 
  const [character, setCharacter] = useState();
  const {params} = useRoute(); //aqui eu to pegando o id, ai uso useRoute
@@ -94,8 +94,8 @@ const About = ({id}) => {
 
 
  return (
-  <SafeAreaView >
-   {character?
+<View style={{ paddingBottom: Math.max(insets.bottom, 16) }} >
+     {character?
    <View style={styles.card}>
    <Text></Text>
    <Text style={styles.name}>{character.name}</Text>
@@ -104,14 +104,17 @@ const About = ({id}) => {
      style={styles.image}
     />
   <View style={styles.viewText}>
-   <Text style={styles.texts}>Status: {character.status}</Text>
-   <Text style={styles.texts}>Species: {character.species}</Text>
-   <Text style={styles.texts}>Gender: {character.gender}</Text>
+    <Text style={styles.texts}>Status: {character.name}</Text>
+    <Text style={styles.texts}>Species: {character.status}</Text>
+    <Text style={styles.texts}>Gender: {character.species}</Text>
+    <Text style={styles.texts}>Gender: {character.gender}</Text>
+    <Text style={styles.texts}>Gender: {character.origin.name}</Text>
+    <Text style={styles.texts}>Gender: {character.location.name}</Text>
    </View>
    </View>
    : "" }
 
-  </SafeAreaView>
+  </View>
  );
 };
 
