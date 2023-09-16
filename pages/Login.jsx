@@ -1,6 +1,7 @@
 /*eslint-disable*/
-import { useState } from "react";
-import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput, View,   TouchableOpacity,
+} from "react-native";
 
 const styles = StyleSheet.create({
     input: {
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
     }
 
 })
+
 const Login = ({navigation}) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
@@ -60,7 +62,29 @@ const Login = ({navigation}) => {
 
 /*    const [existEmail, setExistEmail] = useState(true)
     const [existPassword, setExistPassword] = useState(true)*/
+    const validateEmail = (email) => {
 
+        if (!email) {
+          return false;
+        } else {
+          return true;
+        }
+      };
+
+    const validatePassword = (password) => {
+        if(!password) {
+            password = ""
+        }
+        if (!password && password.length < 8) {
+          return false;
+        } else {
+          return true;
+        }
+      };
+    useEffect(() => {
+        {password? setCorrectDataPass(true) : setCorrectDataPass(false)}
+    
+    },[])
 
     const onChangeValue = (value) => {
         if(value.length >= 10) {
@@ -82,6 +106,15 @@ const Login = ({navigation}) => {
         }
         setPassword(value)
     }
+    const handleLogin = () => {
+        const isEmailValid = validateEmail(email);
+        const isPasswordValid = validatePassword(password);
+    
+        if (isEmailValid && isPasswordValid) {
+          // As duas validações passaram, você pode prosseguir com o login
+          navigation.navigate('Pagination');
+        }
+      };
     
     return (
         <View style={styles.backGround}>
@@ -106,30 +139,22 @@ const Login = ({navigation}) => {
                 value={password}
                 onChangeText={onChangePassword}
             />
+
             {avisoInput? <Text style={styles.textError}>{avisoInput}</Text> : ""}
 
             {avisoInputPass? <Text style={styles.textError}>{avisoInputPass}</Text> : ""}
             <Button 
                 title="Login"
                 color="#2f903d"
-                onPress={() => {
-                    if(correctDataPass !=null && correctDataEmail){
-                        navigation.navigate('Pagination')
-                    }
-                } 
-            }
+                onPress={handleLogin}
+
             /> 
-            <Button 
-            title="Confira aqui os episodios"
-            color="#2f903d"
-            onPress={() => {
-                    navigation.navigate('Episodes')  
-            } 
-        }
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('Episodes')}>
+            <Text style={{ color: "#2f903d", margin: 10 }}>Confira aqui os episodios</Text>
+        </TouchableOpacity>
         </SafeAreaView>
         </View>
     );
 }
 
-export default Login;
+export default Login
