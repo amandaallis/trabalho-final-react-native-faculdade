@@ -1,9 +1,10 @@
-/*eslint-disable*/
+/eslint-disable/
 import {NavigationContainer} from '@react-navigation/native';
 import Login from './pages/Login';
 import Pagination from './pages/Pagination';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import About from './pages/About';
+import Episodes from './pages/Episodes';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -17,6 +18,7 @@ const App = () => {
         />
         <Stack.Screen name="Pagination" component={Pagination} />
         <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Episodes" component={Episodes} />
       </Stack.Navigator>
     </NavigationContainer>
   );

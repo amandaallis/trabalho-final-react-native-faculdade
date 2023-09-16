@@ -60,35 +60,31 @@ const styles = StyleSheet.create({
 });
 
 const RenderItem = ({character}) => {
-  const {name, image, location, id} = character;
+  console.log(character);
+  const {name, air_date, episode} = character;
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('About', {id})}>
-      <View style={styles.card}>
-        <Image source={{uri: image}} style={styles.image} />
-        <Text style={styles.text}>{name}</Text>
-
-        <Text style={styles.textLoc}>Ultima localização: {location.name}</Text>
-      </View>
-    </TouchableOpacity>
+    <View style={styles.card}>
+      <Text>Name: {name}</Text>
+      <Text>Air Date: {air_date}</Text>
+      <Text>Episode: {episode}</Text>
+    </View>
   );
 };
 
-const Pagination = () => {
+const Episodes = () => {
   const [character, setCharacter] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
   const insets = useSafeAreaInsets();
   const renderData = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://rickandmortyapi.com/api/character?page=${page}`,
+        'https://rickandmortyapi.com/api/episode',
       );
       const results = response.data.results;
       setCharacter(prev => [...prev, ...results]);
-      setPage(prev => prev + 1);
     } catch (error) {
       console.error('Erro ao obter personagens:', error);
     } finally {
@@ -128,4 +124,4 @@ const Pagination = () => {
   );
 };
 
-export default Pagination;
+export default Episodes;
